@@ -1,0 +1,422 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "78d10eb9",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'1.21.5'"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "np.__version__"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "320e65b6",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "   CustomerID  Gender  Age  Annual Income (k$)  Spending Score (1-100)\n",
+      "0           1    Male   19                  15                      39\n",
+      "1           2    Male   21                  15                      81\n",
+      "2           3  Female   20                  16                       6\n",
+      "3           4  Female   23                  16                      77\n",
+      "4           5  Female   31                  17                      40\n",
+      "5           6  Female   22                  17                      76\n",
+      "6           7  Female   35                  18                       6\n",
+      "7           8  Female   23                  18                      94\n",
+      "8           9    Male   64                  19                       3\n",
+      "9          10  Female   30                  19                      72\n",
+      "Index(['CustomerID', 'Gender', 'Age', 'Annual Income (k$)',\n",
+      "       'Spending Score (1-100)'],\n",
+      "      dtype='object')\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "60.56"
+      ]
+     },
+     "execution_count": 15,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import pandas as pd \n",
+    "df=pd.read_csv('C:/Users/User/Downloads/Mall_Customers (1).csv')\n",
+    "df\n",
+    "print(df.head(10))\n",
+    "print(df.columns)\n",
+    "average_income=df['Annual Income (k$)'].mean()\n",
+    "average_income"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "c13b707e",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>CustomerID</th>\n",
+       "      <th>Gender</th>\n",
+       "      <th>Age</th>\n",
+       "      <th>Annual Income (k$)</th>\n",
+       "      <th>Spending Score (1-100)</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>1</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>19</td>\n",
+       "      <td>15</td>\n",
+       "      <td>39</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>2</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>21</td>\n",
+       "      <td>15</td>\n",
+       "      <td>81</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>3</td>\n",
+       "      <td>Female</td>\n",
+       "      <td>20</td>\n",
+       "      <td>16</td>\n",
+       "      <td>6</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>4</td>\n",
+       "      <td>Female</td>\n",
+       "      <td>23</td>\n",
+       "      <td>16</td>\n",
+       "      <td>77</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>5</td>\n",
+       "      <td>Female</td>\n",
+       "      <td>31</td>\n",
+       "      <td>17</td>\n",
+       "      <td>40</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   CustomerID  Gender  Age  Annual Income (k$)  Spending Score (1-100)\n",
+       "0           1    Male   19                  15                      39\n",
+       "1           2    Male   21                  15                      81\n",
+       "2           3  Female   20                  16                       6\n",
+       "3           4  Female   23                  16                      77\n",
+       "4           5  Female   31                  17                      40"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import pandas as pd \n",
+    "df=pd.read_csv('C:/Users/User/Downloads/Mall_Customers (1).csv')\n",
+    "df.head(5)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "6b8dfeb9",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Index(['CustomerID', 'Gender', 'Age', 'Annual Income (k$)',\n",
+       "       'Spending Score (1-100)'],\n",
+       "      dtype='object')"
+      ]
+     },
+     "execution_count": 19,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.columns"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "941b474c",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "60.56\n",
+      "0      False\n",
+      "1      False\n",
+      "2      False\n",
+      "3      False\n",
+      "4      False\n",
+      "       ...  \n",
+      "195     True\n",
+      "196     True\n",
+      "197     True\n",
+      "198     True\n",
+      "199     True\n",
+      "Name: Annual Income (k$), Length: 200, dtype: bool\n"
+     ]
+    }
+   ],
+   "source": [
+    "avg_annual_income = df['Annual Income (k$)'].mean()\n",
+    "print(avg_annual_income)\n",
+    "print((df['Annual Income (k$)'] -avg_annual_income) > 0)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "id": "2ff80193",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>CustomerID</th>\n",
+       "      <th>Gender</th>\n",
+       "      <th>Age</th>\n",
+       "      <th>Annual Income (k$)</th>\n",
+       "      <th>Spending Score (1-100)</th>\n",
+       "      <th>above_avg_income</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>8</th>\n",
+       "      <td>9</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>64</td>\n",
+       "      <td>19</td>\n",
+       "      <td>3</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>64</th>\n",
+       "      <td>65</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>63</td>\n",
+       "      <td>48</td>\n",
+       "      <td>51</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>84</th>\n",
+       "      <td>85</td>\n",
+       "      <td>Female</td>\n",
+       "      <td>21</td>\n",
+       "      <td>54</td>\n",
+       "      <td>57</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>128</th>\n",
+       "      <td>129</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>59</td>\n",
+       "      <td>71</td>\n",
+       "      <td>11</td>\n",
+       "      <td>True</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>69</th>\n",
+       "      <td>70</td>\n",
+       "      <td>Female</td>\n",
+       "      <td>32</td>\n",
+       "      <td>48</td>\n",
+       "      <td>47</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>31</th>\n",
+       "      <td>32</td>\n",
+       "      <td>Female</td>\n",
+       "      <td>21</td>\n",
+       "      <td>30</td>\n",
+       "      <td>73</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>7</th>\n",
+       "      <td>8</td>\n",
+       "      <td>Female</td>\n",
+       "      <td>23</td>\n",
+       "      <td>18</td>\n",
+       "      <td>94</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>113</th>\n",
+       "      <td>114</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>19</td>\n",
+       "      <td>64</td>\n",
+       "      <td>46</td>\n",
+       "      <td>True</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>6</td>\n",
+       "      <td>Female</td>\n",
+       "      <td>22</td>\n",
+       "      <td>17</td>\n",
+       "      <td>76</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>26</th>\n",
+       "      <td>27</td>\n",
+       "      <td>Female</td>\n",
+       "      <td>45</td>\n",
+       "      <td>28</td>\n",
+       "      <td>32</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "     CustomerID  Gender  Age  Annual Income (k$)  Spending Score (1-100)  \\\n",
+       "8             9    Male   64                  19                       3   \n",
+       "64           65    Male   63                  48                      51   \n",
+       "84           85  Female   21                  54                      57   \n",
+       "128         129    Male   59                  71                      11   \n",
+       "69           70  Female   32                  48                      47   \n",
+       "31           32  Female   21                  30                      73   \n",
+       "7             8  Female   23                  18                      94   \n",
+       "113         114    Male   19                  64                      46   \n",
+       "5             6  Female   22                  17                      76   \n",
+       "26           27  Female   45                  28                      32   \n",
+       "\n",
+       "     above_avg_income  \n",
+       "8               False  \n",
+       "64              False  \n",
+       "84              False  \n",
+       "128              True  \n",
+       "69              False  \n",
+       "31              False  \n",
+       "7               False  \n",
+       "113              True  \n",
+       "5               False  \n",
+       "26              False  "
+      ]
+     },
+     "execution_count": 26,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['above_avg_income'] = (df['Annual Income (k$)'] -avg_annual_income) > 0\n",
+    "df.sample(10)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ba19af70",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.13"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
